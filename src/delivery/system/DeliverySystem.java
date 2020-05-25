@@ -5,7 +5,10 @@
  */
 package delivery.system;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -17,6 +20,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -33,7 +38,7 @@ public class DeliverySystem extends Application {
     public static Stage primaryStage;
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) throws IOException, FileNotFoundException, SQLException {
 
         try {
             // TODO
@@ -46,9 +51,18 @@ public class DeliverySystem extends Application {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
+        primaryStage.setOnCloseRequest(e -> {
+            try {
+                WriteToLogTile();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DeliverySystem.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(DeliverySystem.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+        
         Pane root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
-
+        WriteToLogTile();
         Scene scene = new Scene(root);
         primaryStage.setTitle("Delivery System");
         primaryStage.setScene(scene);
@@ -114,4 +128,67 @@ public class DeliverySystem extends Application {
 
     }
 
+    public void WriteToLogTile() throws FileNotFoundException, SQLException{
+        File file = new File("LogFile.txt");
+        PrintWriter output = new PrintWriter(file);
+        ResultSet rs = DeliverySystem.statement.executeQuery("Select * From employees");
+        output.print("Employees :\n");
+        output.print("========================================================\n");
+        while (rs.next()) {
+            output.print("ID:"+rs.getInt("id")+" | "+"Name:"+rs.getString("name")+" | "+"Phone:"+rs.getString("phone")+
+                    " | "+"Salary:"+rs.getDouble("salary")+" | "+"Email:"+rs.getString("email")+" | "+"Local_Tel:"+rs.getString("local_tel")+" | "+"DOB:"+rs.getString("dob")+
+                    " | "+"Stat:"+rs.getString("state")+"\n");
+        }
+         output.print("========================================================\n");
+        output.print("Drivers :\n");
+        output.print("========================================================\n");
+        rs = DeliverySystem.statement.executeQuery("Select * From drivers");
+        while (rs.next()) {
+            output.print("Id:"+rs.getInt("id")+" | "+"Name:"+rs.getString("name")+" | "+"Phone:"+rs.getString("phone")+
+                    " | "+"Salary:"+rs.getDouble("salary")+" | "+"Email"+rs.getString("email")+" | "+"Transportation"+rs.getString("transportation")+" | "+"DOB:"+rs.getString("dob")+
+                    " | "+"Stat :"+rs.getString("state")+"\n");
+        }
+         output.print("========================================================\n");
+        output.print("Customers :\n");
+        output.print("========================================================\n");
+        rs = DeliverySystem.statement.executeQuery("Select * From customers");
+        while (rs.next()) {
+            output.print("Id"+rs.getInt("id")+" | "+"Name"+rs.getString("name")+" | "+"Phone :"+rs.getString("phone")+
+                    " | "+"Adders 1"+rs.getString("addres1")+" | "+"Addres 2"+rs.getString("addres2")+" | "+"Last Oreder :"+rs.getString("lastOrder")+
+                    " | "+"Number Of Orders"+rs.getInt("numberOfOrdes")+" | "+"Dp_number :"+rs.getString("dp_number")+"\n");
+        }
+         output.print("========================================================\n");
+        output.print("Orders :\n");
+        output.print("========================================================\n");
+        rs = DeliverySystem.statement.executeQuery("SELECT * FROM `orderss record`");
+        while (rs.next()) {
+            output.print("Id :"+rs.getInt("id")+" | "+"Customer ID :"+rs.getInt("customer_id")+" | "+"Name :"+rs.getString("name")+" | "+"Phone :"+rs.getString("contactPhone")+
+                     " | "+"Type:"+rs.getString("type")+ " | "+"Date :"+rs.getString("date")+ " | "+"Total Time :"+rs.getString("totalTime")
+                    + " | "+"Product :"+rs.getString("product")+" | "+"Price Of Product :"+rs.getDouble("priceOfProduct")+" | "+"Price Of Delivery :"+rs.getDouble("priceOfdelivery")+
+                    " | "+"Total Price :"+rs.getDouble("totalPrice")+" | "+"Notes :"+rs.getString("notes")+" | "+
+                   "Driver ID :"+rs.getInt("driver_id")+" | "+"Cal Csenter Emp ID :"+rs.getInt("call_center_emp_id")+" | "+
+                    " | "+"Addres 1 :"+rs.getString("addres1")+" | "+"Addres 2 :"+rs.getString("addres2")+" | "+
+                    " | "+"Dp_number"+rs.getString("dp_nmber")+"\n");
+        }
+        output.close();
+        File file2 = new File("Employee & Drives Attend Record.txt");
+        PrintWriter output2 = new PrintWriter(file2);
+         output2.print("Employees :\n");
+        output2.print("========================================================\n");
+        rs = DeliverySystem.statement.executeQuery("Select * From `employees records`");
+        while (rs.next()) {
+           output2.print("ID :"+rs.getInt("id")+" | "+" Name :"+rs.getString("name")+" | "+"Date :"+rs.getTimestamp("date")+"\n");
+        }
+         output2.print("========================================================\n");
+         output2.print("Drivers :\n");
+        output2.print("========================================================\n");
+        rs = DeliverySystem.statement.executeQuery("Select * From `drivers records`");
+        while (rs.next()) {
+           output2.print("ID :"+rs.getInt("id")+" | "+" Name :"+rs.getString("name")+" | "+"Date :"+rs.getTimestamp("date")+"\n");
+        }
+ 
+        output2.close();
+
+
+    }
 }
