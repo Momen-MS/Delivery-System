@@ -311,6 +311,7 @@ public class DriverViewController implements Initializable {
     }
 
     public void showInwaitingOrdersTable() throws SQLException, ParseException {
+        DeliverySystem.updateDatabaseTime();
         watingOrdAllordersTable.getSelectionModel().clearSelection();
         ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `wait list` WHERE driverId =" + this.LoginDriverID);
         watingOrdAllordersTable.getItems().clear();
@@ -376,6 +377,12 @@ public class DriverViewController implements Initializable {
 
             DeliverySystem.statement.executeUpdate(q);
 
+            String qq= "UPDATE customers SET numberOfOrdes = numberOfOrdes +1  , lastOrder ='" + order.getDate() + " " + order.getTime() + "' WHERE id ='"+customerId+"';";
+        DeliverySystem.statement.executeUpdate(qq);
+            
+            
+            String query = "DELETE FROM `wait list` WHERE `wait list`.`id` =" + order.getId();
+            DeliverySystem.statement.executeUpdate(query);
             
             showInwaitingOrdersTable();
 
@@ -470,7 +477,20 @@ public class DriverViewController implements Initializable {
 
      @FXML
     private void EmailReceivedDeletebutAC(ActionEvent event) throws SQLException {
-        
+        usersClasses.emails email = EmailReceivedTableView.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showRecivedEmails();
+            }
+        }
     }
 
     @FXML
@@ -513,7 +533,20 @@ public class DriverViewController implements Initializable {
 
     @FXML
     private void emailSentDeleteButAC(ActionEvent event) throws SQLException {
-      
+        usersClasses.emails email = emailSentTable.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showSentEmails();
+            }
+        }
     }
 
     @FXML

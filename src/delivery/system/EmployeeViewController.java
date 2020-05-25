@@ -503,7 +503,27 @@ public class EmployeeViewController implements Initializable {
 
     @FXML
     private void watingOrdDeleteButAC(ActionEvent event) throws SQLException, ParseException {
-      
+        usersClasses.waitList order = watingOrdAllordersTable.getSelectionModel().getSelectedItem();
+        if (this.EmpID == order.getCall_center_emp_id()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Order");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the order will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = order.getId();
+                String q = "DELETE FROM `wait list` WHERE `wait list`.`id` =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                cleanWaitingOrders();
+            }
+        } else {
+            Alert x = new Alert(Alert.AlertType.ERROR);
+            x.setTitle("Delete Order");
+            x.setHeaderText("You Can't Delete This Order !");
+            x.setContentText("You Don't Have The Permissions To Deleteing , Contact With your administrator for more Informations ");
+            x.show();
+        }
+
     }
 
     @FXML
@@ -544,6 +564,7 @@ public class EmployeeViewController implements Initializable {
     }
 
     public void showInwaitingOrdersTable() throws SQLException, ParseException {
+        DeliverySystem.updateDatabaseTime();
         watingOrdAllordersTable.getSelectionModel().clearSelection();
         ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `wait list`");
         watingOrdAllordersTable.getItems().clear();
@@ -674,7 +695,20 @@ public class EmployeeViewController implements Initializable {
 
      @FXML
     private void EmailReceivedDeletebutAC(ActionEvent event) throws SQLException {
-       
+        usersClasses.emails email = EmailReceivedTableView.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showRecivedEmails();
+            }
+        }
     }
 
     @FXML
@@ -717,7 +751,20 @@ public class EmployeeViewController implements Initializable {
 
     @FXML
     private void emailSentDeleteButAC(ActionEvent event) throws SQLException {
-       
+        usersClasses.emails email = emailSentTable.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showSentEmails();
+            }
+        }
     }
 
     @FXML

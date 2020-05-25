@@ -486,12 +486,54 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void empAllUpdateButtonAC(ActionEvent event) throws SQLException {
-       
+        usersClasses.employees employee = EmpAllTableView.getSelectionModel().getSelectedItem();
+        if (employee != null) {
+            int IdToUpdate = employee.getId();
+            String newName = empAllNameTF.getText();
+            String newPhone = empAllPhoneTF.getText();
+            String newTel = empAllLocalTelTF.getText();
+            String newEmail = empAllEmailTF.getText();
+            String newSallary = empAllSalaryTF.getText();
+            String newDob = empAllDofInput.getValue().toString();
+            String q = "UPDATE employees SET name ='" + newName + "', phone ='" + newPhone + "', email ='" + newEmail + "', dob ='" + newDob + "', local_tel ='" + newTel + "', salary ='" + newSallary + "', state ='" + this.Instate + "' WHERE id ='" + IdToUpdate + "';";
+            DeliverySystem.statement.executeUpdate(q);
+            empAllNameTF.setText("");
+            empAllPhoneTF.setText("");
+            empAllLocalTelTF.setText("");
+            empAllEmailTF.setText("");
+            empAllSalaryTF.setText("");
+            empAllDofInput.setValue(null);
+            empstate.selectToggle(null);
+            showInTable();
+        }
     }
 
     @FXML
     private void empAllDeleteButtonAC(ActionEvent event) throws SQLException {
-      
+        usersClasses.employees employee = EmpAllTableView.getSelectionModel().getSelectedItem();
+        if (employee != null) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Employee");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the employee will deleted from database..... ");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = employee.getId();
+                String q = "DELETE FROM `employees` WHERE `employees`.`id` =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                empAllNameTF.setText("");
+                empAllPhoneTF.setText("");
+                empAllLocalTelTF.setText("");
+                empAllEmailTF.setText("");
+                empAllSalaryTF.setText("");
+                empAllDofInput.setValue(null);
+                empstate.selectToggle(null);
+                showInTable();
+            } else {
+
+            }
+        }
     }
 
     @FXML
@@ -608,12 +650,56 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void driUpdateButAC(ActionEvent event) throws SQLException {
-       
+        usersClasses.drivers driver = DriAllTableView.getSelectionModel().getSelectedItem();
+        if (driver != null) {
+            int IdToUpdate = driver.getId();
+            String newName = driUpNameTF.getText();
+            String newPhone = driUpPhoneTF.getText();
+            String newTrans = driUpTras.getText();
+            String newEmail = driUpEmailTF.getText();
+            String newSallary = DriUpSalaryTF.getText();
+            String newDob = driUPDoBTF.getValue().toString();
+            String q = "UPDATE drivers SET name ='" + newName + "', phone ='" + newPhone + "', email ='" + newEmail + "',transportation ='" + newTrans + "', dob ='" + newDob + "', salary ='" + newSallary + "', state ='" + this.Instate + "' WHERE id ='" + IdToUpdate + "';";
+            DeliverySystem.statement.executeUpdate(q);
+            driUpNameTF.setText("");
+            driUpPhoneTF.setText("");
+            driUpEmailTF.setText("");
+            driUpTras.setText("");
+            DriUpSalaryTF.setText("");
+            driUPDoBTF.setValue(null);
+            driUpstate.selectToggle(null);
+            showInDriverTable();
+
+        }
 
     }
 
     @FXML
     private void dirDeleteButAC(ActionEvent event) throws SQLException {
+        usersClasses.drivers driver = DriAllTableView.getSelectionModel().getSelectedItem();
+        if (driver != null) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Driver");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Driver will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = driver.getId();
+                String q = "DELETE FROM drivers WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                driUpNameTF.setText("");
+                driUpPhoneTF.setText("");
+                driUpEmailTF.setText("");
+                driUpTras.setText("");
+                DriUpSalaryTF.setText("");
+                driUPDoBTF.setValue(null);
+                driUpstate.selectToggle(null);
+                showInDriverTable();
+            } else {
+
+            }
+        }
+
     }
 
     @FXML
@@ -721,7 +807,18 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void watingOrdDeleteButAC(ActionEvent event) throws SQLException, ParseException {
-       
+        usersClasses.waitList order = watingOrdAllordersTable.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Order");
+        alert.setHeaderText("Are You Sure ? ");
+        alert.setContentText("In this case the order will deleted from database..... ");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            int IdToDelete = order.getId();
+            String q = "DELETE FROM `wait list` WHERE `wait list`.`id` =" + IdToDelete;
+            DeliverySystem.statement.executeUpdate(q);
+            cleanWaitingOrders();
+        }
     }
 
     @FXML
@@ -762,6 +859,7 @@ public class AdminViewController implements Initializable {
     }
 
     public void showInwaitingOrdersTable() throws SQLException, ParseException {
+         DeliverySystem.updateDatabaseTime();
         watingOrdAllordersTable.getSelectionModel().clearSelection();
         ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `wait list`");
         watingOrdAllordersTable.getItems().clear();
@@ -810,7 +908,21 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void AllOrdDeleteButAC(ActionEvent event) throws SQLException {
-       
+        usersClasses.orderss_record order = AllOrdtable.getSelectionModel().getSelectedItem();
+        if (order != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Order");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the order will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = order.getId();
+                String q = "DELETE FROM `orderss record` WHERE `orderss record`.`id` =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                clearAllOrderTable();
+                showInAllOrdersTable();
+            }
+        }
     }
 
     @FXML
@@ -983,6 +1095,20 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void EmailReceivedDeletebutAC(ActionEvent event) throws SQLException {
+        usersClasses.emails email = EmailReceivedTableView.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showRecivedEmails();
+            }
+        }
     }
 
     @FXML
@@ -1025,7 +1151,20 @@ public class AdminViewController implements Initializable {
 
     @FXML
     private void emailSentDeleteButAC(ActionEvent event) throws SQLException {
-        
+        usersClasses.emails email = emailSentTable.getSelectionModel().getSelectedItem();
+        if (email != null) {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Email");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Email will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = email.getId();
+                String q = "DELETE FROM emails WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showSentEmails();
+            }
+        }
     }
 
     @FXML

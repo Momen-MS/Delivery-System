@@ -5,10 +5,7 @@
  */
 package delivery.system;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -20,8 +17,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -38,7 +33,7 @@ public class DeliverySystem extends Application {
     public static Stage primaryStage;
 
     @Override
-    public void start(Stage primaryStage) throws IOException, FileNotFoundException, SQLException {
+    public void start(Stage primaryStage) throws IOException {
 
         try {
             // TODO
@@ -52,9 +47,8 @@ public class DeliverySystem extends Application {
             ex.printStackTrace();
         }
 
-        
         Pane root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
-   
+
         Scene scene = new Scene(root);
         primaryStage.setTitle("Delivery System");
         primaryStage.setScene(scene);
@@ -89,7 +83,35 @@ public class DeliverySystem extends Application {
         return generatedPassword;
     }
 
-   
+    public static String getTotalTime(String time1) throws ParseException {
+        DateFormat dff = new SimpleDateFormat("HH:mm:ss");
+        Date dateobjj = new Date();
+        String time2 = dff.format(dateobjj);
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+        Date date1 = format.parse(time1);
+        Date date2 = format.parse(time2);
+        long difference = date2.getTime() - date1.getTime();
+        String x = String.valueOf(difference / 60000);
+        return x;
+    }
 
-   
+    public static void updateDatabaseTime() throws SQLException, ParseException {
+        String[][] customer = new String [100][2];
+        int numofOreder = 0 ; 
+        ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `wait list`");
+        for (int i = 0; rs.next(); i++) {
+             usersClasses.waitList order = new usersClasses.waitList();
+            order.setId(rs.getInt("id"));
+            order.setTime(rs.getString("time"));
+                customer[i][0] = ""+order.getId();
+                customer[i][1] = order.getTime();
+                numofOreder++;
+        }
+        for (int i = 0; i < numofOreder; i++) {
+            String q = "UPDATE `wait list` SET totalTime = '"+getTotalTime(customer[i][1])+"' WHERE id ='"+customer[i][0]+"';";
+            statement.executeUpdate(q);
+        }
+
+    }
+
 }
