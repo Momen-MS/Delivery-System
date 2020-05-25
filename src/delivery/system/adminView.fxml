@@ -1,0 +1,1042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="539.0" prefWidth="986.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delivery.system.AdminViewController">
+   <children>
+      <HBox layoutX="-1.0" layoutY="-1.0" prefHeight="574.0" prefWidth="1078.0">
+         <children>
+            <TabPane prefHeight="574.0" prefWidth="1087.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="employeesTabPane" text="Employees">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox layoutX="-1.0" prefHeight="546.0" prefWidth="1078.0">
+                                 <children>
+                                    <TabPane prefHeight="546.0" prefWidth="1082.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab fx:id="empAllTabPane" onSelectionChanged="#empAllTabPaneAC" text="All">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="986.0">
+                                                   <children>
+                                                      <HBox layoutX="2.0" prefHeight="467.0" prefWidth="986.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="EmpAllTableView" prefHeight="427.0" prefWidth="579.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="empAllTvId" prefWidth="72.0" text="ID" />
+                                                                <TableColumn fx:id="empAllTvName" prefWidth="263.0" text="Name" />
+                                                                  <TableColumn fx:id="empAllTvLocal_tel" prefWidth="85.0" text="Local Tel" />
+                                                                  <TableColumn fx:id="empAllTvPhone" prefWidth="101.0" text="phone" />
+                                                                  <TableColumn fx:id="empAllTvState" prefWidth="62.0" text="State" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <GridPane hgap="5.0" prefHeight="410.0" prefWidth="354.0" vgap="5.0">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="96.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="252.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Label text="Name:" />
+                                                                  <Label text="Phone:" GridPane.rowIndex="1" />
+                                                                  <Label text="Email:" GridPane.rowIndex="2" />
+                                                                  <Label text="DOB:" GridPane.rowIndex="3" />
+                                                                  <Label text="Local Tel:" GridPane.rowIndex="4" />
+                                                                  <Label text="Salary:" GridPane.rowIndex="5" />
+                                                                  <Label text="State:" GridPane.rowIndex="6" />
+                                                                  <Label GridPane.rowIndex="7" />
+                                                                  <TextField fx:id="empAllNameTF" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="empAllPhoneTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="empAllEmailTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="empAllLocalTelTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <TextField fx:id="empAllSalaryTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                     <children>
+                                                                        <RadioButton fx:id="empAllAvtiveRA" mnemonicParsing="false" onAction="#empAllAvtiveRaAC" text="Active">
+                                                                           <toggleGroup>
+                                                                              <ToggleGroup fx:id="empstate" />
+                                                                           </toggleGroup>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="empAllinaciveRA" mnemonicParsing="false" onAction="#empAllInvtiveRaAC" text="Inactive" toggleGroup="$empstate" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                                     <padding>
+                                                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                                                     </padding>
+                                                                     <children>
+                                                                        <Button fx:id="empAllUpdateButton" mnemonicParsing="false" onAction="#empAllUpdateButtonAC" text="Update" />
+                                                                        <Button fx:id="empAllDeleteButton" mnemonicParsing="false" onAction="#empAllDeleteButtonAC" text="Delete" />
+                                                                        <Button fx:id="empAllClearButton" mnemonicParsing="false" onAction="#empAllClearButtonAC" text="Clear" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <DatePicker fx:id="empAllDofInput" prefHeight="27.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                               </children>
+                                                               <HBox.margin>
+                                                                  <Insets />
+                                                               </HBox.margin>
+                                                            </GridPane>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab fx:id="EmpRocordTap" onSelectionChanged="#EmpRocordTap" text="Rocords">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" layoutX="2.0" layoutY="-1.0" prefHeight="523.0" prefWidth="1066.0" spacing="20.0">
+                                                         <children>
+                                                            <TableView fx:id="EmpRocordTable" prefHeight="493.0" prefWidth="491.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="EmpRocordIdTV" prefWidth="75.0" text="ID" />
+                                                                <TableColumn fx:id="EmpRocordNameTV" prefWidth="217.0" text="Name" />
+                                                                  <TableColumn fx:id="EmpRocordDateTV" prefWidth="197.0" text="Date" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <VBox alignment="TOP_CENTER" prefHeight="493.0" prefWidth="299.0" spacing="20.0">
+                                                               <children>
+                                                                  <Label text="Search By Name :">
+                                                                     <font>
+                                                                        <Font size="25.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="EmpRocordsearchTF" onKeyReleased="#EmpRocordSearchTFAC" prefHeight="35.0" prefWidth="299.0" />
+                                                                  <Button fx:id="EmpRocordClearBut" mnemonicParsing="false" onAction="#EmpRocordClearButAC" prefHeight="32.0" prefWidth="66.0" text="Clear" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab fx:id="empAddTabPane" text="Add">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" layoutX="1.0" prefHeight="475.0" prefWidth="986.0" spacing="10.0">
+                                                         <children>
+                                                            <GridPane prefHeight="445.0" prefWidth="511.0">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" prefWidth="66.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="445.0" minWidth="10.0" prefWidth="445.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Label text="ID:" />
+                                                                  <Label text="Name:" GridPane.rowIndex="1" />
+                                                                  <Label text="Phone:" GridPane.rowIndex="3" />
+                                                                  <Label text="Email:" GridPane.rowIndex="4" />
+                                                                  <Label text="DOB:" GridPane.rowIndex="5" />
+                                                                  <Label text="Local Tel :" GridPane.rowIndex="6" />
+                                                                  <Label text="Salary :" GridPane.rowIndex="7" />
+                                                                  <Label text="State :" GridPane.rowIndex="8" />
+                                                                  <TextField fx:id="empAddIdTF" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="empAddNameTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="empAddPhoneTF" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <TextField fx:id="empAddEmailTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <TextField fx:id="empaddLocalTelTF" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                  <TextField fx:id="empAddSalaryTF" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                                     <children>
+                                                                        <RadioButton fx:id="empaddActiveRA" mnemonicParsing="false" onAction="#empAddActiveRaAC" text="Active">
+                                                                           <toggleGroup>
+                                                                              <ToggleGroup fx:id="empAddstate" />
+                                                                           </toggleGroup>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="empaddInavtiveRA" mnemonicParsing="false" onAction="#empAllInactivRaAC" text="InActive" toggleGroup="$empAddstate" />
+                                                                     </children>
+                                                                     <GridPane.margin>
+                                                                        <Insets />
+                                                                     </GridPane.margin>
+                                                                     <padding>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <DatePicker fx:id="empAddDobInput" prefHeight="27.0" prefWidth="211.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                  <Label text="Password:" GridPane.rowIndex="2" />
+                                                                  <PasswordField fx:id="empAddPassTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <VBox alignment="CENTER" prefHeight="409.0" prefWidth="100.0" spacing="15.0">
+                                                               <children>
+                                                                  <Button fx:id="empAddAddButton" mnemonicParsing="false" onAction="#empAddAddButtonAC" prefHeight="27.0" prefWidth="50.0" text="Add" />
+                                                                  <Button fx:id="empAddClearButtone" mnemonicParsing="false" onAction="#empAddClearButtonAC" text="Clear" />
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab fx:id="driverTAB" text="Drivers">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox layoutX="1.0" prefHeight="545.0" prefWidth="1077.0">
+                                 <children>
+                                    <TabPane prefHeight="545.0" prefWidth="1080.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab fx:id="driAllTap" onSelectionChanged="#driAllTapAC" text="All">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox layoutX="-1.0" prefHeight="476.0" prefWidth="986.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="DriAllTableView" prefHeight="446.0" prefWidth="596.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="driAllidTV" prefWidth="75.0" text="ID" />
+                                                                <TableColumn fx:id="driAllNameTV" prefWidth="226.0" text="Name" />
+                                                                  <TableColumn fx:id="driAllPhoneTV" prefWidth="99.0" text="Phone" />
+                                                                  <TableColumn fx:id="driAllTransTV" prefWidth="123.0" text="Transportation" />
+                                                                  <TableColumn fx:id="driAllStateTV" prefWidth="72.0" text="State" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <GridPane prefHeight="446.0" prefWidth="344.0">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="101.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="282.0" minWidth="10.0" prefWidth="243.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Label text="Name:" />
+                                                                  <Label text="Phone:" GridPane.rowIndex="1" />
+                                                                  <Label text="Email:" GridPane.rowIndex="2" />
+                                                                  <Label text="DOB:" GridPane.rowIndex="3" />
+                                                                  <Label text="Transportation:" GridPane.rowIndex="4" />
+                                                                  <Label text="Salary:" GridPane.rowIndex="5" />
+                                                                  <Label text="State:" GridPane.rowIndex="6" />
+                                                                  <TextField fx:id="driUpNameTF" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="driUpPhoneTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="driUpEmailTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="driUpTras" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <TextField fx:id="DriUpSalaryTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                                     <children>
+                                                                        <RadioButton fx:id="driUpActiveRa" mnemonicParsing="false" onAction="#driUpActiveRaAC" text="Active">
+                                                                           <toggleGroup>
+                                                                              <ToggleGroup fx:id="driUpstate" />
+                                                                           </toggleGroup>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="driUpInactiveRa" mnemonicParsing="false" onAction="#driUpInactiveRaAC" text="Inactive" toggleGroup="$driUpstate" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                                                     <children>
+                                                                        <Button fx:id="driUpdateBut" mnemonicParsing="false" onAction="#driUpdateButAC" text="Update" />
+                                                                        <Button fx:id="driDeleteBut" mnemonicParsing="false" onAction="#dirDeleteButAC" text="Delete" />
+                                                                        <Button fx:id="driAllClearBut" mnemonicParsing="false" onAction="#driAllClearButAC" text="Clear" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <DatePicker fx:id="driUPDoBTF" prefHeight="27.0" prefWidth="214.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                               </children>
+                                                            </GridPane>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab fx:id="DrivRecordTap" onSelectionChanged="#DrivRecordTapAC" text="Records">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="523.0" prefWidth="1066.0" spacing="20.0">
+                                                         <children>
+                                                            <TableView fx:id="DrivRecordTable" prefHeight="493.0" prefWidth="491.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="driverRecordIdTV" prefWidth="75.0" text="ID" />
+                                                                  <TableColumn fx:id="driverRecordNameID" prefWidth="217.0" text="Name" />
+                                                                  <TableColumn fx:id="driverRecordDateTV" prefWidth="197.0" text="Date" />
+                                                               </columns>
+                                                            </TableView>
+                                                            <VBox alignment="TOP_CENTER" prefHeight="493.0" prefWidth="299.0" spacing="20.0">
+                                                               <children>
+                                                                  <Label text="Search By Name:">
+                                                                     <font>
+                                                                        <Font size="25.0" />
+                                                                     </font>
+                                                                  </Label>
+                                                                  <TextField fx:id="driverRecordSearchTF" onKeyReleased="#driverRecordSearchTFAC" prefHeight="35.0" prefWidth="299.0" />
+                                                                  <Button fx:id="driverRecordClearBut" mnemonicParsing="false" onAction="#driverRecordClearButAC" prefHeight="32.0" prefWidth="66.0" text="Clear" />
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children></AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab text="Add">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" layoutX="-2.0" layoutY="-1.0" prefHeight="477.0" prefWidth="986.0" spacing="10.0">
+                                                         <children>
+                                                            <GridPane prefHeight="437.0" prefWidth="388.0">
+                                                              <columnConstraints>
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.0" minWidth="10.0" prefWidth="95.0" />
+                                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="293.0" />
+                                                              </columnConstraints>
+                                                              <rowConstraints>
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                              </rowConstraints>
+                                                               <children>
+                                                                  <Label text="ID:" />
+                                                                  <Label text="Name:" GridPane.rowIndex="1" />
+                                                                  <Label text="Phone:" GridPane.rowIndex="2" />
+                                                                  <Label text="Email:" GridPane.rowIndex="3" />
+                                                                  <Label text="PassWord:" GridPane.rowIndex="4" />
+                                                                  <Label prefHeight="17.0" prefWidth="34.0" text="DOB:" GridPane.rowIndex="5" />
+                                                                  <Label text="Salary:" GridPane.rowIndex="7" />
+                                                                  <Label text="State:" GridPane.rowIndex="8" />
+                                                                  <Label text="transportation:" GridPane.rowIndex="6" />
+                                                                  <TextField fx:id="driAddIdTF" GridPane.columnIndex="1" />
+                                                                  <TextField fx:id="driAddNameTF" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                                  <TextField fx:id="driAddPhoneTF" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                                  <TextField fx:id="DriAddEmailTF" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                                  <TextField fx:id="driAddPassTF" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                                  <TextField fx:id="driAddTrancTF" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                                  <TextField fx:id="driAddSalaryTF" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                                  <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                                     <children>
+                                                                        <RadioButton fx:id="driAddActiveRa" mnemonicParsing="false" onAction="#driAddActiveRaAC" text="Active">
+                                                                           <toggleGroup>
+                                                                              <ToggleGroup fx:id="driAddstate" />
+                                                                           </toggleGroup>
+                                                                        </RadioButton>
+                                                                        <RadioButton fx:id="driAddInactiveRa" mnemonicParsing="false" onAction="#driAddInactiveRaAC" text="Inactive" toggleGroup="$driAddstate" />
+                                                                     </children>
+                                                                     <padding>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </padding>
+                                                                  </HBox>
+                                                                  <DatePicker fx:id="driAddDobTF" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                               </children>
+                                                            </GridPane>
+                                                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+                                                               <children>
+                                                                  <Button fx:id="driAddAddBut" mnemonicParsing="false" onAction="#driAddAddButAction" prefHeight="27.0" prefWidth="55.0" text="Add" />
+                                                                  <Button fx:id="driAddClearBut" mnemonicParsing="false" onAction="#driAddClearButAction" prefHeight="27.0" prefWidth="56.0" text="Clear" />
+                                                               </children>
+                                                               <padding>
+                                                                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                                               </padding>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children></AnchorPane>
+                                            </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="watingOrdTap" onSelectionChanged="#watingOrdTapAC" text="Wating Orderss">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="-1.0" prefHeight="538.0" prefWidth="1078.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="watingOrdAllordersTable" prefHeight="284.0" prefWidth="1044.0">
+                                       <columns>
+                                          <TableColumn fx:id="watingOrdIDTV" prefWidth="48.0" text="ID" />
+                                          <TableColumn fx:id="watingOrdNameTV" prefWidth="226.0" text="Name" />
+                                          <TableColumn fx:id="watingOrdTypeTV" prefWidth="60.0" text="Type" />
+                                          <TableColumn fx:id="watingOrdPhoneTV" prefWidth="88.0" text="Phone" />
+                                          <TableColumn fx:id="watingOrdDateTV" prefWidth="70.0" text="Date" />
+                                          <TableColumn fx:id="watingOrdTimeTV" prefWidth="57.0" text="Time" />
+                                          <TableColumn fx:id="watingOrdTotalTimeTV" prefWidth="67.0" text="Total Time" />
+                                          <TableColumn fx:id="watingOrdTotalPriceTV" prefWidth="79.0" text="Total Price " />
+                                          <TableColumn fx:id="watingOrdDriverIDTV" prefWidth="64.0" text="Driver ID" />
+                                          <TableColumn fx:id="watingOrdEmployeeIDTV" prefWidth="77.0" text="Employee ID" />
+                                          <TableColumn fx:id="watingOrdAddresTV" prefWidth="206.0" text="Addres" />
+                                       </columns>
+                                    </TableView>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="216.0" prefWidth="1044.0" spacing="15.0">
+                                       <children>
+                                          <VBox prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="employee Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="58.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="148.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Local Tel :" GridPane.rowIndex="2" />
+                                                      <Label text="Email :" GridPane.rowIndex="3" />
+                                                      <Label fx:id="watingOrdidLB" prefHeight="17.0" prefWidth="153.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="watingOrdNameLB" layoutX="68.0" layoutY="17.0" prefHeight="17.0" prefWidth="147.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="watingOrdLocalTelLB" layoutX="68.0" layoutY="47.0" prefHeight="17.0" prefWidth="150.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="watingOrdEmailLB" layoutX="68.0" layoutY="77.0" prefHeight="17.0" prefWidth="151.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="12.0" layoutY="12.0" prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Driver Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="85.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="121.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Phone" GridPane.rowIndex="2" />
+                                                      <Label text="transportation :" GridPane.rowIndex="3" />
+                                                      <Label text="Email :" GridPane.rowIndex="4" />
+                                                      <Label fx:id="watingOrdDrIdLB" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="watingOrdDrNameLB" layoutX="95.0" layoutY="17.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="watingOrdDrPhone" layoutX="95.0" layoutY="47.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="watingOrdDrTranLB" layoutX="95.0" layoutY="77.0" prefHeight="17.0" prefWidth="125.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="watingOrdDrEmailLB" layoutX="95.0" layoutY="107.0" prefHeight="17.0" prefWidth="124.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="269.0" layoutY="12.0" prefHeight="210.0" prefWidth="449.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Customer Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <HBox prefHeight="174.0" prefWidth="530.0">
+                                                   <children>
+                                                      <GridPane prefHeight="150.0" prefWidth="239.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="102.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Addres 2 :" />
+                                                            <Label text="Product :" GridPane.rowIndex="1" />
+                                                            <Label text="Price Of Product :" GridPane.rowIndex="2" />
+                                                            <Label text="Price Of Delivery :" GridPane.rowIndex="3" />
+                                                            <Label fx:id="watingOrdAddress2LB" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" />
+                                                            <Label fx:id="watingOrdProductLB" layoutX="108.0" layoutY="24.0" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label fx:id="watingOrdPOPLB" layoutX="108.0" layoutY="68.0" prefHeight="17.0" prefWidth="142.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label fx:id="watingOrdPODLB" layoutX="108.0" layoutY="111.0" prefHeight="17.0" prefWidth="143.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <VBox prefHeight="174.0" prefWidth="203.0">
+                                                         <children>
+                                                            <Label prefHeight="26.0" prefWidth="68.0" text="Notes :" />
+                                                            <TextArea fx:id="watingOrdNotesTA" prefHeight="118.0" prefWidth="195.0" text="empty....." />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="watingOrdDeleteBut" mnemonicParsing="false" onAction="#watingOrdDeleteButAC" text="Delete" />
+                                                <Button fx:id="watingOrdclearBut" mnemonicParsing="false" onAction="#watingOrdclearButAC" prefHeight="25.0" prefWidth="50.0" text="Clear" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="AllOrdTap" onSelectionChanged="#AllOrdTapAC" text="All Ordderss">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="538.0" prefWidth="1078.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="AllOrdtable" prefHeight="284.0" prefWidth="1044.0">
+                                       <columns>
+                                          <TableColumn fx:id="AllOrdIDTV" prefWidth="48.0" text="ID" />
+                                          <TableColumn fx:id="AllOrdIDCustTV" prefWidth="48.0" text="ID_CUS" />
+                                          <TableColumn fx:id="AllOrdNameTV" prefWidth="226.0" text="Name" />
+                                          <TableColumn fx:id="AllOrdTypeTV" prefWidth="60.0" text="Type" />
+                                          <TableColumn fx:id="AllOrdPhoneTV" prefWidth="88.0" text="Phone" />
+                                          <TableColumn fx:id="AllOrdDateTV" prefWidth="202.0" text="Date" />
+                                          <TableColumn fx:id="AllOrdTotalTimeTV" prefWidth="74.0" text="Total Time" />
+                                          <TableColumn fx:id="AllOrdTotalPriceTV" prefWidth="86.0" text="Total Price " />
+                                          <TableColumn fx:id="AllOrdAddresTV" prefWidth="211.0" text="Addres" />
+                                       </columns>
+                                    </TableView>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="216.0" prefWidth="1044.0" spacing="15.0">
+                                       <children>
+                                          <VBox prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="employee Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="58.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="148.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Local Tel :" GridPane.rowIndex="2" />
+                                                      <Label text="Email :" GridPane.rowIndex="3" />
+                                                      <Label fx:id="AllOrdEmpIdLB" prefHeight="17.0" prefWidth="153.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="AllOrdEmpNameLB" layoutX="68.0" layoutY="17.0" prefHeight="17.0" prefWidth="147.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="AllOrdEmpLocalTelLB" layoutX="68.0" layoutY="47.0" prefHeight="17.0" prefWidth="150.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="AllOrdEmpEmailLB" layoutX="68.0" layoutY="77.0" prefHeight="17.0" prefWidth="151.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="12.0" layoutY="12.0" prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Driver Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="85.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="121.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Phone" GridPane.rowIndex="2" />
+                                                      <Label text="transportation :" GridPane.rowIndex="3" />
+                                                      <Label text="Email :" GridPane.rowIndex="4" />
+                                                      <Label fx:id="AllOrddrIDLB" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="AllOrddrNameLB" layoutX="95.0" layoutY="17.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="AllOrddrPhoneLB" layoutX="95.0" layoutY="47.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="AllOrddrTransLB" layoutX="95.0" layoutY="77.0" prefHeight="17.0" prefWidth="125.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="AllOrddrEmailLB" layoutX="95.0" layoutY="107.0" prefHeight="17.0" prefWidth="124.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="269.0" layoutY="12.0" prefHeight="210.0" prefWidth="449.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Customer Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <HBox prefHeight="174.0" prefWidth="530.0">
+                                                   <children>
+                                                      <GridPane prefHeight="150.0" prefWidth="239.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="102.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Addres 2 :" />
+                                                            <Label text="Product :" GridPane.rowIndex="1" />
+                                                            <Label text="Price Of Product :" GridPane.rowIndex="2" />
+                                                            <Label text="Price Of Delivery :" GridPane.rowIndex="3" />
+                                                            <Label fx:id="AllOrdCuAddres2LB" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" />
+                                                            <Label fx:id="AllOrdCuProductLB" layoutX="108.0" layoutY="24.0" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label fx:id="AllOrdCuPOPLB" layoutX="108.0" layoutY="68.0" prefHeight="17.0" prefWidth="142.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label fx:id="AllOrdCuPODLB" layoutX="108.0" layoutY="111.0" prefHeight="17.0" prefWidth="143.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <VBox prefHeight="174.0" prefWidth="203.0">
+                                                         <children>
+                                                            <Label prefHeight="26.0" prefWidth="68.0" text="Notes :" />
+                                                            <TextArea fx:id="AllOrdCuNotesTA" prefHeight="118.0" prefWidth="195.0" text="empty....." />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="AllOrdDeleteBut" mnemonicParsing="false" onAction="#AllOrdDeleteButAC" text="Delete" />
+                                                <Button fx:id="AllOrdClearBut" mnemonicParsing="false" onAction="#AllOrdClearButAC" prefHeight="25.0" prefWidth="50.0" text="Clear" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Emails">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox layoutX="1.0" layoutY="-1.0" prefHeight="548.0" prefWidth="1077.0">
+                                 <children>
+                                    <TabPane prefHeight="548.0" prefWidth="1079.0" tabClosingPolicy="UNAVAILABLE">
+                                      <tabs>
+                                        <Tab fx:id="EmailReceivedTap" onSelectionChanged="#EmailReceivedTapAC" text="Received ">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox prefHeight="518.0" prefWidth="1077.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="EmailReceivedTableView" prefHeight="488.0" prefWidth="525.0">
+                                                              <columns>
+                                                                <TableColumn fx:id="EmailReceivedFromTV" prefWidth="197.0" text="From" />
+                                                                <TableColumn fx:id="EmailReceivedTitleTV" prefWidth="168.0" text="Title" />
+                                                                  <TableColumn fx:id="EmailReceivedDateTV" prefWidth="157.0" text="Date" />
+                                                              </columns>
+                                                            </TableView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="488.0" prefWidth="484.0">
+                                                               <children>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedTitleLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="From :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedFromTitle" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Date :">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedDateLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="EmailReceivedContentTA" prefHeight="169.0" prefWidth="484.0" text="empty">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="EmailReceivedDeleteBut" mnemonicParsing="false" onAction="#EmailReceivedDeletebutAC" text="Delete" />
+                                                                        <Button fx:id="EmailReceivedClearBut" mnemonicParsing="false" onAction="#EmailReceivedClearButAC" text="Clear" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                        <Tab fx:id="newEmailTap" text="+New Email">
+                                          <content>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="518.0" prefWidth="1077.0" spacing="20.0">
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <VBox prefHeight="488.0" prefWidth="686.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="newEmailTitleTF" prefHeight="34.0" prefWidth="619.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="To">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="newEmailToTF" prefHeight="34.0" prefWidth="619.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="newEmailContetnTA" prefHeight="225.0" prefWidth="689.0">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="newEmailClearBut" mnemonicParsing="false" onAction="#newEmailClearButAC" text="Clear" />
+                                                                        <Button fx:id="newEmailSendBut" mnemonicParsing="false" onAction="#newEmailSendButAC" text="Send" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                          </content>
+                                        </Tab>
+                                          <Tab fx:id="emailSentTap" onSelectionChanged="#emailSentTapAC" text="Sent">
+                                            <content>
+                                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox prefHeight="518.0" prefWidth="1077.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="emailSentTable" prefHeight="488.0" prefWidth="525.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="emailSentToTV" prefWidth="197.0" text="To" />
+                                                                  <TableColumn fx:id="emailSentTitleTV" prefWidth="168.0" text="Title" />
+                                                                  <TableColumn fx:id="emailSentDateTV" prefWidth="157.0" text="Date" />
+                                                               </columns>
+                                                            </TableView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="488.0" prefWidth="484.0">
+                                                               <children>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentTitleLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="To">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentToLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Date :">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentDateLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="emailSentContentLB" prefHeight="169.0" prefWidth="484.0" text="empty">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="emailSentDeleteBut" mnemonicParsing="false" onAction="#emailSentDeleteButAC" text="Delete" />
+                                                                        <Button fx:id="emailSentClearBut" mnemonicParsing="false" onAction="#emailSentClearButAC" text="Clear" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </Tab>
+                                      </tabs>
+                                    </TabPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

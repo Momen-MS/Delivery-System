@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="557.0" prefWidth="1064.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="delivery.system.DriverViewController">
+    <stylesheets>
+        <URL value="@driverview.css" />
+    </stylesheets>
+   <children>
+      <HBox prefHeight="574.0" prefWidth="1074.0">
+         <children>
+            <TabPane prefHeight="529.0" prefWidth="1151.0" tabClosingPolicy="UNAVAILABLE">
+               <tabs>
+                  <Tab fx:id="TODOlIStTap" onSelectionChanged="#ToDoListTapAC" text="Todo List">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="-1.0" prefHeight="538.0" prefWidth="1064.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="watingOrdAllordersTable" prefHeight="284.0" prefWidth="1044.0">
+                                       <columns>
+                                          <TableColumn fx:id="watingOrdIDTV" prefWidth="48.0" text="ID" />
+                                          <TableColumn fx:id="watingOrdNameTV" prefWidth="226.0" text="Name" />
+                                          <TableColumn fx:id="watingOrdTypeTV" prefWidth="60.0" text="Type" />
+                                          <TableColumn fx:id="watingOrdPhoneTV" prefWidth="88.0" text="Phone" />
+                                          <TableColumn fx:id="watingOrdDateTV" prefWidth="70.0" text="Date" />
+                                          <TableColumn fx:id="watingOrdTimeTV" prefWidth="57.0" text="Time" />
+                                          <TableColumn fx:id="watingOrdTotalTimeTV" prefWidth="67.0" text="Total Time" />
+                                          <TableColumn fx:id="watingOrdTotalPriceTV" prefWidth="79.0" text="Total Price " />
+                                          <TableColumn fx:id="watingOrdDriverIDTV" prefWidth="64.0" text="Driver ID" />
+                                          <TableColumn fx:id="watingOrdEmployeeIDTV" prefWidth="77.0" text="Employee ID" />
+                                          <TableColumn fx:id="watingOrdAddresTV" prefWidth="206.0" text="Addres" />
+                                       </columns>
+                                    </TableView>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="216.0" prefWidth="1044.0" spacing="15.0">
+                                       <children>
+                                          <VBox prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="employee Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="58.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="148.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Local Tel :" GridPane.rowIndex="3" />
+                                                      <Label text="Email :" GridPane.rowIndex="4" />
+                                                      <Label fx:id="watingOrdidLB" prefHeight="17.0" prefWidth="153.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="watingOrdNameLB" layoutX="68.0" layoutY="17.0" prefHeight="17.0" prefWidth="147.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="watingOrdLocalTelLB" layoutX="68.0" layoutY="47.0" prefHeight="17.0" prefWidth="150.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="watingOrdEmailLB" layoutX="68.0" layoutY="77.0" prefHeight="17.0" prefWidth="151.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <Label text="Phone" GridPane.rowIndex="2" />
+                                                      <Label fx:id="waitOrdPhoneLB" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="269.0" layoutY="12.0" prefHeight="210.0" prefWidth="525.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Customer Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <HBox prefHeight="174.0" prefWidth="530.0">
+                                                   <children>
+                                                      <GridPane prefHeight="174.0" prefWidth="284.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="102.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Addres 2 :" />
+                                                            <Label text="Product :" GridPane.rowIndex="1" />
+                                                            <Label text="Price Of Product :" GridPane.rowIndex="2" />
+                                                            <Label text="Price Of Delivery :" GridPane.rowIndex="3" />
+                                                            <Label fx:id="watingOrdAddress2LB" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" />
+                                                            <Label fx:id="watingOrdProductLB" layoutX="108.0" layoutY="24.0" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label fx:id="watingOrdPOPLB" layoutX="108.0" layoutY="68.0" prefHeight="17.0" prefWidth="142.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label fx:id="watingOrdPODLB" layoutX="108.0" layoutY="111.0" prefHeight="17.0" prefWidth="143.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <VBox prefHeight="174.0" prefWidth="268.0">
+                                                         <children>
+                                                            <Label prefHeight="26.0" prefWidth="68.0" text="Notes :" />
+                                                            <TextArea fx:id="watingOrdNotesTA" prefHeight="118.0" prefWidth="195.0" text="empty....." />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox alignment="CENTER" prefHeight="210.0" prefWidth="201.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="watingOrdDoneBut" mnemonicParsing="false" onAction="#watingOrdDoneButAC" text="Sent Delivered Handed" />
+                                                <Button fx:id="watingOrdclearBut" mnemonicParsing="false" onAction="#watingOrdclearButAC" prefHeight="25.0" prefWidth="50.0" text="Clear" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="AllOrdTap" onSelectionChanged="#AllOrdTapAC" text="All Ordderss">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="538.0" prefWidth="1064.0" spacing="10.0">
+                                 <children>
+                                    <TableView fx:id="AllOrdtable" prefHeight="284.0" prefWidth="1044.0">
+                                       <columns>
+                                          <TableColumn fx:id="AllOrdIDTV" prefWidth="48.0" text="ID" />
+                                          <TableColumn fx:id="AllOrdIDCustTV" prefWidth="48.0" text="ID_CUS" />
+                                          <TableColumn fx:id="AllOrdNameTV" prefWidth="226.0" text="Name" />
+                                          <TableColumn fx:id="AllOrdTypeTV" prefWidth="60.0" text="Type" />
+                                          <TableColumn fx:id="AllOrdPhoneTV" prefWidth="88.0" text="Phone" />
+                                          <TableColumn fx:id="AllOrdDateTV" prefWidth="202.0" text="Date" />
+                                          <TableColumn fx:id="AllOrdTotalTimeTV" prefWidth="74.0" text="Total Time" />
+                                          <TableColumn fx:id="AllOrdTotalPriceTV" prefWidth="86.0" text="Total Price " />
+                                          <TableColumn fx:id="AllOrdAddresTV" prefWidth="211.0" text="Addres" />
+                                       </columns>
+                                    </TableView>
+                                    <Separator prefWidth="200.0" />
+                                    <HBox prefHeight="216.0" prefWidth="1044.0" spacing="15.0">
+                                       <children>
+                                          <VBox prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="employee Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="58.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="148.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Local Tel :" GridPane.rowIndex="2" />
+                                                      <Label text="Email :" GridPane.rowIndex="3" />
+                                                      <Label fx:id="AllOrdEmpIdLB" prefHeight="17.0" prefWidth="153.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="AllOrdEmpNameLB" layoutX="68.0" layoutY="17.0" prefHeight="17.0" prefWidth="147.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="AllOrdEmpLocalTelLB" layoutX="68.0" layoutY="47.0" prefHeight="17.0" prefWidth="150.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="AllOrdEmpEmailLB" layoutX="68.0" layoutY="77.0" prefHeight="17.0" prefWidth="151.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="12.0" layoutY="12.0" prefHeight="212.0" prefWidth="221.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Driver Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <GridPane>
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="122.0" minWidth="10.0" prefWidth="85.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.0" minWidth="10.0" prefWidth="121.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Label text="ID :" />
+                                                      <Label text="Name :" GridPane.rowIndex="1" />
+                                                      <Label text="Phone" GridPane.rowIndex="2" />
+                                                      <Label text="transportation :" GridPane.rowIndex="3" />
+                                                      <Label text="Email :" GridPane.rowIndex="4" />
+                                                      <Label fx:id="AllOrddrIDLB" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" />
+                                                      <Label fx:id="AllOrddrNameLB" layoutX="95.0" layoutY="17.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <Label fx:id="AllOrddrPhoneLB" layoutX="95.0" layoutY="47.0" prefHeight="17.0" prefWidth="123.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <Label fx:id="AllOrddrTransLB" layoutX="95.0" layoutY="77.0" prefHeight="17.0" prefWidth="125.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <Label fx:id="AllOrddrEmailLB" layoutX="95.0" layoutY="107.0" prefHeight="17.0" prefWidth="124.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                   </children>
+                                                </GridPane>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox layoutX="269.0" layoutY="12.0" prefHeight="210.0" prefWidth="449.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="37.0" prefWidth="256.0">
+                                                   <children>
+                                                      <Label text="Customer Information">
+                                                         <font>
+                                                            <Font size="21.0" />
+                                                         </font>
+                                                      </Label>
+                                                   </children>
+                                                </VBox>
+                                                <HBox prefHeight="174.0" prefWidth="530.0">
+                                                   <children>
+                                                      <GridPane prefHeight="150.0" prefWidth="239.0">
+                                                         <columnConstraints>
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="119.0" minWidth="10.0" prefWidth="102.0" />
+                                                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="145.0" />
+                                                         </columnConstraints>
+                                                         <rowConstraints>
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                         </rowConstraints>
+                                                         <children>
+                                                            <Label text="Addres 2 :" />
+                                                            <Label text="Product :" GridPane.rowIndex="1" />
+                                                            <Label text="Price Of Product :" GridPane.rowIndex="2" />
+                                                            <Label text="Price Of Delivery :" GridPane.rowIndex="3" />
+                                                            <Label fx:id="AllOrdCuAddres2LB" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" />
+                                                            <Label fx:id="AllOrdCuProductLB" layoutX="108.0" layoutY="24.0" prefHeight="17.0" prefWidth="139.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                            <Label fx:id="AllOrdCuPOPLB" layoutX="108.0" layoutY="68.0" prefHeight="17.0" prefWidth="142.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                            <Label fx:id="AllOrdCuPODLB" layoutX="108.0" layoutY="111.0" prefHeight="17.0" prefWidth="143.0" text="Empty" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                         </children>
+                                                      </GridPane>
+                                                      <VBox prefHeight="174.0" prefWidth="203.0">
+                                                         <children>
+                                                            <Label prefHeight="26.0" prefWidth="68.0" text="Notes :" />
+                                                            <TextArea fx:id="AllOrdCuNotesTA" prefHeight="118.0" prefWidth="195.0" text="empty....." />
+                                                         </children>
+                                                      </VBox>
+                                                   </children>
+                                                </HBox>
+                                             </children>
+                                          </VBox>
+                                          <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                          <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                                             <children>
+                                                <Button fx:id="AllOrdClearBut" mnemonicParsing="false" onAction="#AllOrdClearButAC" prefHeight="25.0" prefWidth="50.0" text="Clear" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                       <padding>
+                                          <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                       </padding>
+                                    </HBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Emails">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox layoutX="1.0" layoutY="-1.0" prefHeight="548.0" prefWidth="1077.0">
+                                 <children>
+                                    <TabPane prefHeight="548.0" prefWidth="1079.0" tabClosingPolicy="UNAVAILABLE">
+                                       <tabs>
+                                          <Tab fx:id="EmailReceivedTap" onSelectionChanged="#EmailReceivedTapAC" text="Received ">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox prefHeight="518.0" prefWidth="1077.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="EmailReceivedTableView" prefHeight="488.0" prefWidth="525.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="EmailReceivedFromTV" prefWidth="197.0" text="From" />
+                                                                  <TableColumn fx:id="EmailReceivedTitleTV" prefWidth="168.0" text="Title" />
+                                                                  <TableColumn fx:id="EmailReceivedDateTV" prefWidth="157.0" text="Date" />
+                                                               </columns>
+                                                            </TableView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="488.0" prefWidth="484.0">
+                                                               <children>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedTitleLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="From :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedFromTitle" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Date :">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="EmailReceivedDateLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="EmailReceivedContentTA" prefHeight="169.0" prefWidth="484.0" text="empty">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="EmailReceivedDeleteBut" mnemonicParsing="false" onAction="#EmailReceivedDeletebutAC" text="Delete" />
+                                                                        <Button fx:id="EmailReceivedClearBut" mnemonicParsing="false" onAction="#EmailReceivedClearButAC" text="Clear" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="newEmailTap" text="+New Email">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox alignment="CENTER" prefHeight="518.0" prefWidth="1077.0" spacing="20.0">
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                         <children>
+                                                            <VBox prefHeight="488.0" prefWidth="686.0">
+                                                               <children>
+                                                                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="newEmailTitleTF" prefHeight="34.0" prefWidth="619.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="To">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <TextField fx:id="newEmailToTF" prefHeight="34.0" prefWidth="619.0" />
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="newEmailContetnTA" prefHeight="225.0" prefWidth="689.0">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="newEmailClearBut" mnemonicParsing="false" onAction="#newEmailClearButAC" text="Clear" />
+                                                                        <Button fx:id="newEmailSendBut" mnemonicParsing="false" onAction="#newEmailSendButAC" text="Send" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="emailSentTap" onSelectionChanged="#emailSentTapAC" text="Sent">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <HBox prefHeight="518.0" prefWidth="1077.0" spacing="15.0">
+                                                         <children>
+                                                            <TableView fx:id="emailSentTable" prefHeight="488.0" prefWidth="525.0">
+                                                               <columns>
+                                                                  <TableColumn fx:id="emailSentToTV" prefWidth="197.0" text="To" />
+                                                                  <TableColumn fx:id="emailSentTitleTV" prefWidth="168.0" text="Title" />
+                                                                  <TableColumn fx:id="emailSentDateTV" prefWidth="157.0" text="Date" />
+                                                               </columns>
+                                                            </TableView>
+                                                            <Separator orientation="VERTICAL" prefHeight="200.0" />
+                                                            <VBox prefHeight="488.0" prefWidth="484.0">
+                                                               <children>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="58.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Title :">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentTitleLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="20.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="To">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentToLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="49.0" prefWidth="62.0" text="Date :">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                        <Label fx:id="emailSentDateLB" prefHeight="48.0" prefWidth="422.0" text="Empty">
+                                                                           <font>
+                                                                              <Font size="17.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="106.0" prefHeight="48.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <Label prefHeight="48.0" prefWidth="86.0" text="Content :">
+                                                                           <font>
+                                                                              <Font size="18.0" />
+                                                                           </font>
+                                                                        </Label>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="BOTTOM_LEFT" layoutX="10.0" layoutY="154.0" prefHeight="229.0" prefWidth="484.0">
+                                                                     <children>
+                                                                        <TextArea fx:id="emailSentContentLB" prefHeight="169.0" prefWidth="484.0" text="empty">
+                                                                           <font>
+                                                                              <Font size="13.0" />
+                                                                           </font>
+                                                                        </TextArea>
+                                                                     </children>
+                                                                  </HBox>
+                                                                  <HBox alignment="TOP_RIGHT" prefHeight="65.0" prefWidth="454.0" spacing="15.0">
+                                                                     <children>
+                                                                        <Button fx:id="emailSentDeleteBut" mnemonicParsing="false" onAction="#emailSentDeleteButAC" text="Delete" />
+                                                                        <Button fx:id="emailSentClearBut" mnemonicParsing="false" onAction="#emailSentClearButAC" text="Clear" />
+                                                                     </children>
+                                                                     <VBox.margin>
+                                                                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                                     </VBox.margin>
+                                                                  </HBox>
+                                                               </children>
+                                                            </VBox>
+                                                         </children>
+                                                         <padding>
+                                                            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                                         </padding>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
