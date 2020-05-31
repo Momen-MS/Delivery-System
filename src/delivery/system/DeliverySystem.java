@@ -69,6 +69,7 @@ public class DeliverySystem extends Application {
         primaryStage.resizableProperty().setValue(false);
         primaryStage.show();
         this.primaryStage = primaryStage;
+        
     }
 
     /**
@@ -123,6 +124,22 @@ public class DeliverySystem extends Application {
         }
         for (int i = 0; i < numofOreder; i++) {
             String q = "UPDATE `wait list` SET totalTime = '"+getTotalTime(customer[i][1])+"' WHERE id ='"+customer[i][0]+"';";
+            statement.executeUpdate(q);
+        }
+        
+        String[][] drivers = new String [100][2];
+        int numofdriver = 0 ; 
+         rs = DeliverySystem.statement.executeQuery("SELECT * FROM `ready_drivers`");
+        for (int i = 0; rs.next(); i++) {
+             usersClasses.ready_drivers redyDriver = new usersClasses.ready_drivers();
+            redyDriver.setId(rs.getInt("id"));
+            redyDriver.setWaiting_time(rs.getString("ready_time"));
+                drivers[i][0] = ""+redyDriver.getId();
+                drivers[i][1] = redyDriver.getWaiting_time();
+                numofdriver++;
+        }
+        for (int i = 0; i < numofdriver; i++) {
+            String q = "UPDATE `ready_drivers` SET waiting_time = '"+getTotalTime(drivers[i][1])+"' WHERE id ='"+drivers[i][0]+"';";
             statement.executeUpdate(q);
         }
 

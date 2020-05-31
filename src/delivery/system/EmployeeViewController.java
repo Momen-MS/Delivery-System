@@ -5,6 +5,7 @@
  */
 package delivery.system;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,11 +22,14 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,6 +38,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -261,6 +266,54 @@ public class EmployeeViewController implements Initializable {
     @FXML
     private Button emailSentClearBut;
     public static String empemail;
+    public static String  empename;
+    public static String empepass;
+    @FXML
+    private Tab profileTap;
+    @FXML
+    private Label profileName;
+    @FXML
+    private Label profileEmail;
+    @FXML
+    private PasswordField profileoldpass;
+    @FXML
+    private PasswordField profileNewPass;
+    @FXML
+    private Button profileSetPassBut;
+    @FXML
+    private Button profileLogOutBut;
+    @FXML
+    private Tab CustomerTap;
+    @FXML
+   private TableView<usersClasses.Customers> CustomrtTableVirew;
+    @FXML
+    private TableColumn<usersClasses.Customers, String> CustomerViewIdTV;
+    @FXML
+    private TableColumn<usersClasses.Customers, String> CustomerViewNamTV;
+    @FXML
+    private TableColumn<usersClasses.Customers, Integer> CustomerViewNumberOOTV;
+    @FXML
+    private TableColumn<usersClasses.Customers, String> CustomerViewLasOrdTV;
+    @FXML
+    private TextField CustomerViewSearchTF;
+    @FXML
+    private Button CustomerViewClearShearchBut;
+    @FXML
+    private TextField CustomerViewnameTF;
+    @FXML
+    private TextField CustomerViewPhoneTF;
+    @FXML
+    private TextField CustomerViewAddres1TF;
+    @FXML
+    private TextField CustomerViewAddres2TF;
+    @FXML
+    private TextField CustomerViewDPNumTF;
+    @FXML
+    private Button CustomerViewUpdateBut;
+    @FXML
+    private Button CustomerViewDeleteBut;
+    @FXML
+    private Button CustomerViewClearBut;
 
     /**
      * Initializes the controller class.
@@ -357,6 +410,15 @@ public class EmployeeViewController implements Initializable {
                         showSelectedSentEmail();
 
                     });
+            CustomerViewIdTV.setCellValueFactory(new PropertyValueFactory("id"));
+            CustomerViewNamTV.setCellValueFactory(new PropertyValueFactory("name"));
+            CustomerViewNumberOOTV.setCellValueFactory(new PropertyValueFactory("numberOfOrdes"));
+            CustomerViewLasOrdTV.setCellValueFactory(new PropertyValueFactory("lastOrder"));
+            showInCusomerTable();
+            CustomrtTableVirew.getSelectionModel().selectedItemProperty().addListener(
+                    event -> {
+                        showSelectedCustomerr();
+                    });
 
         } catch (SQLException ex) {
             Logger.getLogger(AdminViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -374,12 +436,12 @@ public class EmployeeViewController implements Initializable {
     }
 
     @FXML
-    private void makeOrdRefreshDLButAC(ActionEvent event) throws SQLException {
+    private void makeOrdRefreshDLButAC(ActionEvent event) throws SQLException, ParseException {
         showInRedyDriverTable();
     }
 
     @FXML
-    private void makeOrdMakeOrdButAC(ActionEvent event) throws SQLException {
+    private void makeOrdMakeOrdButAC(ActionEvent event) throws SQLException, ParseException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Make Order");
         alert.setHeaderText("Do You Want To Start This Order ? ");
@@ -428,14 +490,16 @@ public class EmployeeViewController implements Initializable {
     }
 
     @FXML
-    private void makeOrdClearButAC(ActionEvent event) throws SQLException {
+    private void makeOrdClearButAC(ActionEvent event) throws SQLException, ParseException {
         clearMakeOrder();
 
     }
 
     @FXML
-    private void makeOrdTapAC(Event event) throws SQLException {
-        showInRedyDriverTable();
+    private void makeOrdTapAC(Event event) throws SQLException, ParseException {
+       
+         
+          showInRedyDriverTable();
     }
 
     @FXML
@@ -468,7 +532,8 @@ public class EmployeeViewController implements Initializable {
         }
     }
 
-    public void showInRedyDriverTable() throws SQLException {
+    public void showInRedyDriverTable() throws SQLException, ParseException {
+        DeliverySystem.updateDatabaseTime();
         makeOrdReadyDriversTable.getSelectionModel().clearSelection();
         makeOrdReadyDriversTable.getSelectionModel().clearSelection();
         ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `ready_drivers`");
@@ -483,7 +548,7 @@ public class EmployeeViewController implements Initializable {
         }
     }
 
-    public void clearMakeOrder() throws SQLException {
+    public void clearMakeOrder() throws SQLException, ParseException {
 
         makeOrdAddres1.setText("");
         makeOrdAddres2TF.setText("");
@@ -850,5 +915,166 @@ public class EmployeeViewController implements Initializable {
         emailSentDateLB.setText("empty");
         emailSentContentLB.setText("empty");
     }
+
+        @FXML
+    private void profileSetPassButAc(ActionEvent event) throws SQLException {
+        if (DeliverySystem.hash(profileoldpass.getText()).equals(this.empepass)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Change Password");
+            alert.setHeaderText("Are You Sure You Want To Cahnge Password ? ");
+            alert.setContentText("In this case the password will changed from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                String newPass = DeliverySystem.hash(profileNewPass.getText());
+                this.empepass = newPass;
+                String query = "UPDATE `employees` SET `pass` = '" + newPass + "' WHERE `employees`.`email` = '" + this.empemail + "'";
+                DeliverySystem.statement.executeUpdate(query);
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Information Dialog");
+                a.setHeaderText(null);
+                a.setContentText("The Password Is Changed Successfully");
+                a.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Incorect Inputs");
+            alert.setHeaderText(" Password Is Incorect");
+            alert.setContentText("Please check your Inputs");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void profileLogOutButAC(ActionEvent event) throws IOException {
+        this.empename = null;
+        this.empepass = null;
+        this.empemail = null;
+        Pane root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+        Scene newS = new Scene(root);
+        DeliverySystem.primaryStage.setScene(newS);
+    }
+
+    @FXML
+    private void profileTapAC(Event event) {
+        profileName.setText(this.empename);
+        profileEmail.setText(this.empemail);
+    }
+
+    @FXML
+    private void CustomerViewSearchTFAC(KeyEvent event) throws SQLException {
+      CustomrtTableVirew.getSelectionModel().clearSelection();
+        ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `customers` WHERE name LIKE '%"+CustomerViewSearchTF.getText()+"%'");
+        CustomrtTableVirew.getItems().clear();
+        while (rs.next()) {
+            usersClasses.Customers cu = new usersClasses.Customers();
+            cu.setId(rs.getInt("id"));
+            cu.setName(rs.getString("name"));
+            cu.setPhone(rs.getString("phone"));
+            cu.setLastOrder(rs.getString("lastOrder"));
+            cu.setAddres1(rs.getString("addres1"));
+            cu.setAddres2(rs.getString("addres2"));
+            cu.setNumberOfOrdes(rs.getInt("numberOfOrdes"));
+            cu.setDp_number(rs.getString("dp_number"));
+            CustomrtTableVirew.getItems().add(cu);
+        }  
+
+    }
+
+    @FXML
+    private void CustomerViewUpdateButAC(ActionEvent event) throws SQLException {
+         usersClasses.Customers cu = CustomrtTableVirew.getSelectionModel().getSelectedItem();
+         if (cu != null) {
+            int IdToUpdate = cu.getId();
+            String newName = CustomerViewnameTF.getText();
+            String newPhone = CustomerViewPhoneTF.getText();
+            String Addres1 = CustomerViewAddres1TF.getText();
+            String Addres2 = CustomerViewAddres2TF.getText();
+            String dp_new = CustomerViewDPNumTF.getText();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("update Customer");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Customer will updated from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+            String q = "UPDATE `customers` SET `name` = '"+newName+"', `phone` = '"+newPhone+"', `addres1` = '"+Addres1+"',"
+                    + " `addres2` = '"+Addres2+"', `dp_number` = '"+dp_new+"' WHERE `customers`.`id` = "+IdToUpdate;
+            DeliverySystem.statement.executeUpdate(q); 
+            CustomerViewAddres1TF.setText("");
+            CustomerViewAddres2TF.setText("");
+            CustomerViewnameTF.setText("");
+            CustomerViewPhoneTF.setText("");
+            CustomerViewDPNumTF.setText("");
+             showInCusomerTable();
+            }
+         } 
+    }
+
+    @FXML
+    private void CustomerViewDeleteButAC(ActionEvent event) throws SQLException {
+         usersClasses.Customers cu = CustomrtTableVirew.getSelectionModel().getSelectedItem();
+        if (cu != null) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Customer");
+            alert.setHeaderText("Are You Sure ? ");
+            alert.setContentText("In this case the Customer will deleted from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                int IdToDelete = cu.getId();
+                String q = "DELETE FROM customers WHERE id =" + IdToDelete;
+                DeliverySystem.statement.executeUpdate(q);
+                showInCusomerTable();
+            }    
+        }
+    }
+
+    @FXML
+    private void CustomerViewClearButAC(ActionEvent event) throws SQLException {
+            CustomerViewAddres1TF.setText("");
+            CustomerViewAddres2TF.setText("");
+            CustomerViewnameTF.setText("");
+            CustomerViewPhoneTF.setText("");
+            CustomerViewDPNumTF.setText("");
+            showInCusomerTable();
+    }
+
+    @FXML
+    private void CustomerTapAC(Event event) throws SQLException {
+        showInCusomerTable();
+    }
+
+    public void showInCusomerTable() throws SQLException {
+        CustomrtTableVirew.getSelectionModel().clearSelection();
+        ResultSet rs = DeliverySystem.statement.executeQuery("SELECT * FROM `customers`");
+        CustomrtTableVirew.getItems().clear();
+        while (rs.next()) {
+            usersClasses.Customers cu = new usersClasses.Customers();
+            cu.setId(rs.getInt("id"));
+            cu.setName(rs.getString("name"));
+            cu.setPhone(rs.getString("phone"));
+            cu.setLastOrder(rs.getString("lastOrder"));
+            cu.setAddres1(rs.getString("addres1"));
+            cu.setAddres2(rs.getString("addres2"));
+            cu.setNumberOfOrdes(rs.getInt("numberOfOrdes"));
+            cu.setDp_number(rs.getString("dp_number"));
+            CustomrtTableVirew.getItems().add(cu);
+        }
+    }
+    private void showSelectedCustomerr() {
+        usersClasses.Customers cu = CustomrtTableVirew.getSelectionModel().getSelectedItem();
+        if (cu != null){
+            CustomerViewAddres1TF.setText(String.valueOf(cu.getAddres1()));
+            CustomerViewAddres2TF.setText(String.valueOf(cu.getAddres2()));
+            CustomerViewnameTF.setText(String.valueOf(cu.getName()));
+            CustomerViewPhoneTF.setText(String.valueOf(cu.getPhone()));
+            CustomerViewDPNumTF.setText(String.valueOf(cu.getDp_number()));
+        }
+    }
+
+    @FXML
+    private void CustomerViewClearShearchButAC(ActionEvent event) throws SQLException {
+        CustomerViewSearchTF.setText("");
+        showInCusomerTable();
+    }
 }
+
 

@@ -5,11 +5,15 @@
  */
 package delivery.system;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,17 +21,21 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -196,6 +204,24 @@ public class DriverViewController implements Initializable {
     @FXML
     private Button emailSentClearBut;
     public static String driEmail ;
+    public static String driname ;
+    public static String dripass ;
+    public static String driid ;
+    public static String driTran ;
+    @FXML
+    private Tab profileTap;
+    @FXML
+    private Label profileName;
+    @FXML
+    private Label profileEmail;
+    @FXML
+    private PasswordField profileoldpass;
+    @FXML
+    private PasswordField profileNewPass;
+    @FXML
+    private Button profileSetPassBut;
+    @FXML
+    private Button profileLogOutBut;
 
     /**
      * Initializes the controller class.
@@ -383,6 +409,13 @@ public class DriverViewController implements Initializable {
             
             String query = "DELETE FROM `wait list` WHERE `wait list`.`id` =" + order.getId();
             DeliverySystem.statement.executeUpdate(query);
+            
+            DateFormat dff = new SimpleDateFormat("HH:mm:ss");
+                Date dateobjj = new Date();
+                String time = dff.format(dateobjj);
+                String qqr = "INSERT INTO `ready_drivers` (`id`, `name`, `transportaion`, `orders_num`, `waiting_time`, `ready_time`) VALUES"
+                        + " ('" + this.driid + "', '" + this.driname + "', '" + this.driTran+ "', '" + 1 + "', '0', '" + time + "');";
+                DeliverySystem.statement.executeUpdate(qqr);
             
             showInwaitingOrdersTable();
 
@@ -632,4 +665,51 @@ public class DriverViewController implements Initializable {
         emailSentDateLB.setText("empty");
         emailSentContentLB.setText("empty");
     }
+
+        @FXML
+    private void profileSetPassButAc(ActionEvent event) throws SQLException {
+        if (DeliverySystem.hash(profileoldpass.getText()).equals(this.dripass)) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Change Password");
+            alert.setHeaderText("Are You Sure You Want To Cahnge Password ? ");
+            alert.setContentText("In this case the password will changed from database..... ");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                String newPass = DeliverySystem.hash(profileNewPass.getText());
+                this.dripass = newPass;
+                String query = "UPDATE `drivers` SET `pass` = '" + newPass + "' WHERE `drivers`.`email` = '" + this.driEmail + "'";
+                DeliverySystem.statement.executeUpdate(query);
+                Alert a = new Alert(Alert.AlertType.INFORMATION);
+                a.setTitle("Information Dialog");
+                a.setHeaderText(null);
+                a.setContentText("The Password Is Changed Successfully");
+                a.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Incorect Inputs");
+            alert.setHeaderText(" Password Is Incorect");
+            alert.setContentText("Please check your Inputs");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void profileLogOutButAC(ActionEvent event) throws IOException, SQLException {
+        String q = "DELETE FROM `ready_drivers` WHERE `ready_drivers`.`id` = " +this.driid;
+        DeliverySystem.statement.executeUpdate(q);
+       this.driname = null;
+       this.dripass = null;
+       this.driEmail = null;
+        Pane root = FXMLLoader.load(getClass().getResource("LoginView.fxml"));
+        Scene newS = new Scene(root);
+        DeliverySystem.primaryStage.setScene(newS);
+    }
+
+    @FXML
+    private void profileTapAC(Event event) {
+        profileName.setText(this.driname);
+        profileEmail.setText(this.driEmail);
+    }
 }
+

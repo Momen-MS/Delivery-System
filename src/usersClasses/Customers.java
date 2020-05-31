@@ -17,7 +17,7 @@ public class Customers {
     private String Phone ;
     private String addres1;
     private String addres2;
-    private Timestamp lastOrder;
+    private String lastOrder;
     private int numberOfOrdes;
     private String dp_number ;
 
@@ -38,6 +38,14 @@ public class Customers {
 
     public void setName(String Name) {
         this.name = Name;
+    }
+
+    public String getLastOrder() {
+        return lastOrder;
+    }
+
+    public void setLastOrder(String lastOrder) {
+        this.lastOrder = lastOrder;
     }
 
     public String getPhone() {
@@ -64,13 +72,7 @@ public class Customers {
         this.addres2 = addres2;
     }
 
-    public Timestamp getLastOrder() {
-        return lastOrder;
-    }
 
-    public void setLastOrder(Timestamp lastOrder) {
-        this.lastOrder = lastOrder;
-    }
 
    
 

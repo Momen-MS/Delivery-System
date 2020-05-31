@@ -19,9 +19,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -59,19 +61,26 @@ public class LoginViewController implements Initializable {
         String select = Email.substring(index + 1, index + 2);
 
         if (select.equalsIgnoreCase("a")) {
-            String query = "SELECT email , pass FROM `administrators` Where email = '" + Email + "' AND pass= '" + PassWord + "'";
+            String query = "SELECT email , name , pass FROM `administrators` Where email = '" + Email + "' AND pass= '" + PassWord + "'";
             ResultSet rs = DeliverySystem.statement.executeQuery(query);
             if (rs.next()) {
                 AdminViewController.Adminemail = rs.getString("email");
+                AdminViewController.AdminName = rs.getString("name");
+                AdminViewController.AdminPass = rs.getString("pass");
                 Pane root = FXMLLoader.load(getClass().getResource("adminView.fxml"));
                 Scene newS = new Scene(root);
                 DeliverySystem.primaryStage.setScene(newS);
+
+            } else {
+                errorMass();
             }
         } else if (select.equalsIgnoreCase("e")) {
-            String qq = "SELECT id , name , email , pass FROM `employees` Where email = '" + Email + "' AND pass= '" + PassWord + "'";
+            String qq = "SELECT id , name , email , pass FROM `employees` Where email = '" + Email + "' AND pass= '" + PassWord + "' AND state = 'active'";
             ResultSet rss = DeliverySystem.statement.executeQuery(qq);
             if (rss.next()) {
                 EmployeeViewController.empemail = rss.getString("email");
+                EmployeeViewController.empename = rss.getString("name");
+                EmployeeViewController.empepass = rss.getString("pass");
                 EmployeeViewController.EmpID = rss.getInt("id");
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 qq = "INSERT INTO `employees records` (`id`, `name`, `date`) VALUES ('" + rss.getInt("id") + "', '" + rss.getString("name") + "', '" + timestamp + "');";
@@ -80,12 +89,18 @@ public class LoginViewController implements Initializable {
                 Scene newSs = new Scene(roott);
                 DeliverySystem.primaryStage.setScene(newSs);
 
+            } else {
+                errorMass();
             }
         } else if (select.equalsIgnoreCase("d")) {
-            String qqr = "SELECT id , name , transportation , email , pass FROM `drivers` Where email = '" + Email + "' AND pass= '" + PassWord + "'";
+            String qqr = "SELECT id , name , transportation , email , pass FROM `drivers` Where email = '" + Email + "' AND pass= '" + PassWord + "' AND state = 'active'";
             ResultSet rsss = DeliverySystem.statement.executeQuery(qqr);
             if (rsss.next()) {
                 DriverViewController.driEmail = rsss.getString("email");
+                DriverViewController.driTran = rsss.getString("transportation");
+                DriverViewController.driid = rsss.getString("id");
+                DriverViewController.driname = rsss.getString("name");
+                DriverViewController.dripass = rsss.getString("pass");
                 DriverViewController.LoginDriverID = rsss.getInt("id");
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 driverId = rsss.getInt("id");
@@ -97,8 +112,11 @@ public class LoginViewController implements Initializable {
                 Pane root = FXMLLoader.load(getClass().getResource("DriverView.fxml"));
                 Scene newSss = new Scene(root);
                 DeliverySystem.primaryStage.setScene(newSss);
+            } else {
+                errorMass();
             }
-
+        }else{
+        errorMass();
         }
         String q = "SELECT * FROM `ready_drivers` WHERE id =" + driverId;
         ResultSet rs = DeliverySystem.statement.executeQuery(q);
@@ -113,11 +131,19 @@ public class LoginViewController implements Initializable {
                 Date dateobjj = new Date();
                 String time = dff.format(dateobjj);
                 String qqr = "INSERT INTO `ready_drivers` (`id`, `name`, `transportaion`, `orders_num`, `waiting_time`, `ready_time`) VALUES"
-                        + " ('" + driverId + "', '" + driverName + "', '" + driverTran + "', '" + numOfOrders + "', '22:30:52', '" + time + "');";
+                        + " ('" + driverId + "', '" + driverName + "', '" + driverTran + "', '" + numOfOrders + "', '0', '" + time + "');";
                 DeliverySystem.statement.executeUpdate(qqr);
 
             }
         }
+    }
+
+    public void errorMass() {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Incorect Inputs");
+        alert.setHeaderText("Email Or Password Is Incorect");
+        alert.setContentText("Please check your Inputs");
+        alert.showAndWait();
     }
 
 }
